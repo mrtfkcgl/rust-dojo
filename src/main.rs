@@ -1,39 +1,21 @@
-use std::io::{self, Write};
+use std::io::{Write};
 fn main(){
-    println!("-Triangle Area Calculator (SAS Method)-");
-    println!("Formula: 0.5 * side_a * side_b * sin(angle)");
+    let first_edge: f64;
+    let second_edge: f64;
 
-    let side_a = get_input("Enter the first side lenght: ");
-    let side_b = get_input("Enter the second side lenght: ");
-    let angel_degress = get_input("Enter the angle between them (in degress): ");
+    print!("Plase give the first edge: ");
+    std::io::stdout().flush().unwrap();
+    first_edge = get_value();
+    print!("Plase give the second edge: ");
+    std::io::stdout().flush().unwrap();
+    second_edge = get_value();
 
-    //Rust => expect Radians not degres.
+    let hipo = (first_edge.powi(2)+second_edge.powi(2)).sqrt();
 
-    let angle_radians = angel_degress.to_radians();
-    let area = area(side_a, side_b, angle_radians);
-    println!("\nResult:");
-    println!("Side A: {}", side_a);
-    println!("Side B: {}", side_b);
-    println!("Angle : {} degrees", angle_radians);
-    println!("---------------------------------");
-    println!("Calculated Area: {:.2} square units.", area);
+    println!("Hipo: {}", hipo);
 }
-
-fn area(side_a:f64,side_b:f64,angel_degress:f64)->f64{
-    0.5*side_a*side_b*angel_degress.sin()
-}
-fn get_input(prompt: &str) -> f64{
-    loop{
-        println!("{}",prompt);
-        std::io::stdout().flush().unwrap();
-        let mut input:String = String::new();
-        std::io::stdin().read_line(&mut input).expect("Failed to read input)");
-        match input.trim().parse::<f64>() {
-            Ok(number) => return number,
-            Err(_) => println!("Error: Please enter a valid number!"),
-        }
-
-
-    }
-
+fn get_value()->f64{
+    let mut input:String=String::new();
+    std::io::stdin().read_line(&mut input).expect("Reading Err");
+    input.trim().parse().expect("Not Number")
 }
