@@ -1,29 +1,25 @@
 use std::io::Write;
-fn main()
-{
-    let side_a:f64;
-    let side_b:f64;
-    let side_c:f64;
 
-    print!("Side a:");
+fn main(){
+
+    let input_Number:i32;
+
+    print!("Lütfen bir sayı giriniz:");
     std::io::stdout().flush().unwrap();
-    side_a = get_value();
-    print!("Side b:");
-    std::io::stdout().flush().unwrap();
-    side_b = get_value();
+    input_Number = get_val();
 
-    print!("Side c:");
-    std::io::stdout().flush().unwrap();
-    side_c = get_value();
 
-    let  formulaU:f64 = (side_a+side_b+side_c)/(2 as f64);
+    for i in 1..=input_Number{
+        if input_Number % i == 0{
+            println!("{}",i);
+        }
+    }
 
-    let areaFormula:f64 = (formulaU*((formulaU-side_a)*(formulaU-side_b)*(formulaU - side_c))).sqrt();
-    print!("Area: {}",areaFormula);
 
 }
-fn get_value()->f64{
+
+fn get_val()->i32{
     let mut s:String = String::new();
-    std::io::stdin().read_line(&mut s).expect("Input format error");
+    std::io::stdin().read_line(&mut s).expect("Reading err");
     s.trim().parse().expect("Not a number")
 }
