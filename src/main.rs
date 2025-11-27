@@ -1,28 +1,29 @@
 use std::io::Write;
+fn main()
+{
+    let side_a:f64;
+    let side_b:f64;
+    let side_c:f64;
 
-fn main(){
-    let first_side:f64;
-    let second_side:f64;
-    let angle_degree:f64;
-    print!("Please enter the first side: ");
+    print!("Side a:");
     std::io::stdout().flush().unwrap();
-    first_side = get_value();
-    print!("Please ente the second side: ");
+    side_a = get_value();
+    print!("Side b:");
     std::io::stdout().flush().unwrap();
-    second_side = get_value();
-    print!("Plaese enter the angele side:");
-    std::io::stdout().flush().unwrap();
-    angle_degree = get_value();
-    // Calculation
-    // Formula: 0.5 * a * b * sin(angle)
-    // Important: We must convert the angle from degrees to radians!
+    side_b = get_value();
 
-    let area = 0.5*first_side*second_side*angle_degree.to_radians().sin();
+    print!("Side c:");
+    std::io::stdout().flush().unwrap();
+    side_c = get_value();
 
-    println!("Area of the triangle: {}", area);
+    let  formulaU:f64 = (side_a+side_b+side_c)/(2 as f64);
+
+    let areaFormula:f64 = (formulaU*((formulaU-side_a)*(formulaU-side_b)*(formulaU - side_c))).sqrt();
+    print!("Area: {}",areaFormula);
 
 }
 fn get_value()->f64{
-    let mut input = String::new();
-    std::io::stdin().read_line(&mut input).unwrap();
-    input.trim().parse().expect("Not valid number")}
+    let mut s:String = String::new();
+    std::io::stdin().read_line(&mut s).expect("Input format error");
+    s.trim().parse().expect("Not a number")
+}
