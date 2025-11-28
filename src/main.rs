@@ -1,30 +1,28 @@
 use std::io::Write;
 
-fn main(){
-    let mut value:i32;
+fn main() {
+    let mut Number:i32;
+    let mut reversed_number:i32 = 0;
 
     print!("Number: ");
     std::io::stdout().flush().unwrap();
-    let mut digit:i32;
-    let mut sum:i32 = 0i32;
-    value = get_value();
+    Number = get_number();
 
-    while value > 0 {
+    while Number > 0 {
+        let digit = Number % 10;
+        reversed_number = (reversed_number * 10) + digit;
+        Number /= 10;
+    };
 
-        digit = value % 10;
-        sum += digit;
-        value /= 10;
-
-    }
-    println!("Sum of elements: {}",sum);
-
+    println!("Reversed Number: {}", reversed_number);
 
 }
-
-fn get_value()->i32{
-    let value:i32;
+fn get_number() -> i32{
     let mut s:String = String::new();
-    std::io::stdin().read_line(&mut s).expect("Readign err");
-    value = s.trim().parse().expect("Parsing err");
-    value
+    let number:i32;
+
+    std::io::stdin().read_line(&mut s).expect("Reading err");
+    number = s.trim().parse().expect("Parsing err");
+    number
+
 }
