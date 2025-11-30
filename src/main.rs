@@ -1,47 +1,35 @@
 use std::io::Write;
 
 fn main(){
-    let number:i32;
-    print!("Number: ");
+    let Number:i32;
+    print!("Please enter a positive integer to check: ");
     std::io::stdout().flush().unwrap();
+    Number = get_number();
 
-//     number = get_number();
+    if(is_perfect(Number)){
+        println!("Yes Perct Number");
+    }else {  println!("NOT a 2 Perct Number");}
 
- for i in 1..=1096 {
-     if is_armstrong(i) {
-         println!("{} is an Armstrong number!", i);
-     } else {
-        // println!("{} is NOT an Armstrong number!", i);
-     }
- }
 }
 
 fn get_number()->i32{
-    let mut s: String = String::new();
+    let mut s:String = String::new();
     std::io::stdin().read_line(&mut s).expect("Reading err");
-    // Negatif girerse hata vermesin diye unwrap yerine match veya basit parse
     match s.trim().parse() {
         Ok(num) => num,
         Err(_) => 0,
     }
+
 }
 
-fn is_armstrong(original_number: i32)->bool{
-    if original_number<0{
-        return false;
-    }
-
-    let digit_count = original_number.to_string().len() as u32;
-
+fn is_perfect(number:i32) -> bool {
     let mut sum:i32 = 0;
-    let mut temp_number:i32 = original_number;
-    while temp_number>0 {
-        let digit = temp_number % 10; //en son bas.
-        sum += digit.pow(digit_count);
-        temp_number/=10;
-    }
-    sum == original_number
+        for i in 1..=number/2 {
 
-
+            if number % i == 0 {
+                sum += i;
+            }
+        }
+        sum == number
 
 }
